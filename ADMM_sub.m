@@ -11,7 +11,7 @@ function [X_out] = ADMM_sub(A, y, Y, lambda, mu, n, m)
 % X_out             the output matrix
 
 
-%% ADMM iteration initialization
+%% ADMM initialization
 X1       = zeros(n,n);
 X2       = zeros(n,n);
 X3       = zeros(n,n);
@@ -22,7 +22,7 @@ Y2       = zeros(n,n);
 delta    = 1;        % parameter in ADMM
 iter_max = 3000;     % max number of iterations;
 
-%% Loop
+%% Loop iteraion
 for iter = 1:iter_max
     X1_temp             = A * diag(y) * A' - Y1 - lambda * (eye(n) - Y) + delta * X3;
     X1                  = 1 / delta * (X1_temp - A * diag(inv(abs(A' * A) .^ 2 + delta * eye(m)) * diag(A' * X1_temp * A)) * A');
